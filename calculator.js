@@ -1,6 +1,6 @@
 function displaySum() {
-    let firstNumber = document.querySelector('[name=elso-szam]').value;
-    let secondNumber = document.querySelector('[name=masodik-szam]').value;
+    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
+    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
     document.querySelector(".js-container").innerText = `${ firstNumber } + ${ secondNumber } = ${ firstNumber + secondNumber }`;
   }
   

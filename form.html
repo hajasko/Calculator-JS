@@ -10,17 +10,18 @@
     <form action="#" class="js-form">
         <div class="form-row">
           <label for="elsoSzam" >Első szám: </label>
-          <input type="number" id="elsoSzam" name="elso-szam"/>  
+          <input type="number" id="elsoSzam" name="elso-szam" step="0.1"/>  
         </div>
         <div class="form-row">
           <label for="masodikSzam" >Második szám: </label>
-          <input type="number" id="masodikSzam" name="masodik-szam"/> 
+          <input type="number" id="masodikSzam" name="masodik-szam" step="0.1"/> 
         </div>
         <div class="form-row">
           <button class="js-plus">+</button>
           <button class="js-minus">-</button>
           <button class="js-times">*</button>
           <button class="js-division">/</button>
+          <button class="js-modulus">%</button>
         </div>   
       </form>
       <section class="js-container container"></section>
