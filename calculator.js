@@ -1,31 +1,34 @@
-function displaySum() {
+
+function displayResult(operationSymbol, operationFunction) {
     let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
     let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
-    document.querySelector(".js-container").innerText = `${ firstNumber } + ${ secondNumber } = ${ firstNumber + secondNumber }`;
+    let result = operationFunction(firstNumber, secondNumber)
+    document.querySelector(".js-container").innerText = `${ firstNumber } ${operationSymbol} ${ secondNumber } = ${result}`;
+}
+
+function displaySum() {
+    let sum = (a, b) => a + b;
+    displayResult('+', sum)
   }
   
   function displayDiff() {
-    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
-    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
-    document.querySelector(".js-container").innerText = `${ firstNumber } - ${ secondNumber } = ${ firstNumber - secondNumber }`;
+    let diff = (a, b) => a - b; 
+    displayResult('-', diff);
   }
 
   function displayProd() {
-    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
-    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
-    document.querySelector(".js-container").innerText = `${ firstNumber } * ${ secondNumber } = ${ firstNumber * secondNumber }`;
+   let prod = (a, b) => a * b;
+   displayResult('*', prod);
   }
 
   function displayDiv() {
-    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
-    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
-    document.querySelector(".js-container").innerText = `${ firstNumber } / ${ secondNumber } = ${ firstNumber / secondNumber }`;
+    let div = (a, b) => a / b;
+    displayResult('/', div );
   }
 
   function displayMod() {
-    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
-    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
-    document.querySelector(".js-container").innerText = `${ firstNumber } % ${ secondNumber } = ${ firstNumber % secondNumber }`;
+    let mod = (a, b) => a % b;
+    displayResult('%', mod);
   }
 
   document.querySelector(".js-plus").addEventListener("click", displaySum);
