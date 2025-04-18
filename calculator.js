@@ -5,20 +5,24 @@ function readInput() {
     document.querySelector('[name=masodik-szam]').value
   ]
 }
- 
-function validateInput(firstInputString, secondInputString) {
-  let errorMessage = '';
-  let isValid = true;
 
-  let firstNumber = Number(firstInputString);
-  let secondNumber = Number(secondInputString);
+function validateStringInput (firstInputString, secondInputString) {
+  let errorMessage = '';
 
   if (firstInputString === '') {
-    errorMessage = 'Add meg az első számot! '
+    errorMessage += 'Add meg az első számot! '
   }
   if (secondInputString === '') {
     errorMessage += 'Add meg a második számot!'
   }
+
+  return errorMessage;
+}
+ 
+function validate(firstInputString, secondInputString,operationFunction) {
+  let errorMessage = validateStringInput(firstInputString, secondInputString) + 
+          validateResult(firstInputString,secondInputString, operationFunction);
+
 
   return {
     isValid: errorMessage.length === 0, 
@@ -26,17 +30,29 @@ function validateInput(firstInputString, secondInputString) {
   }
 }
 
+function calculateResult (firstInputString, secondInputString, operationFunction) {
+  let firstNumber = Number(firstInputString);
+  let secondNumber = Number(secondInputString);
+  return operationFunction(firstNumber, secondNumber);
+}
+
+function validateResult (firstInputString, secondInputString, operationFunction) {
+  let result = calculateResult(firstInputString, secondInputString, operationFunction);
+
+  if (Number.isNaN(result)) {
+    return 'Az eredmény nem értelmezhető. ';
+  }
+  return '';
+}
+
 function displayResult(operationSymbol, operationFunction) {
     let [firstInputString, secondInputString] = readInput();
-    let {isValid, errorMessage} = validateInput(firstInputString, secondInputString);
-    let innerTextValue = '';
-
-    let firstNumber = Number(firstInputString);
-    let secondNumber = Number(secondInputString);
-
-    if (isValid) {
-      let result = operationFunction(firstNumber, secondNumber);
-      innerTextValue = `${ firstNumber } ${operationSymbol} ${ secondNumber } = ${result}`; 
+    let {isValid, errorMessage} = validate(firstInputString, secondInputString, operationFunction);
+    let innerTextValue = ''; 
+    
+    if (isValid) {  
+      let result = calculateResult(firstInputString, secondInputString, operationFunction);
+      innerTextValue = `${ firstInputString } ${operationSymbol} ${ secondInputString } = ${result}`; 
     } else {
       innerTextValue = errorMessage;
     }
