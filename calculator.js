@@ -1,7 +1,16 @@
 
+function readInput() {
+  return [
+    document.querySelector('[name=elso-szam]').value,
+    document.querySelector('[name=masodik-szam]').value
+  ]
+}
+ 
+
 function displayResult(operationSymbol, operationFunction) {
-    let firstNumber = Number(document.querySelector('[name=elso-szam]').value);
-    let secondNumber = Number(document.querySelector('[name=masodik-szam]').value);
+    let [firstInputString, secondInputString] = readInput();
+    let firstNumber = Number(firstInputString);
+    let secondNumber = Number(secondInputString);
     let result = operationFunction(firstNumber, secondNumber)
     document.querySelector(".js-container").innerText = `${ firstNumber } ${operationSymbol} ${ secondNumber } = ${result}`;
 }
