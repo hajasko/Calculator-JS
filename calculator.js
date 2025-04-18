@@ -6,13 +6,43 @@ function readInput() {
   ]
 }
  
+function validateInput(firstInputString, secondInputString) {
+  let errorMessage = '';
+  let isValid = true;
+
+  let firstNumber = Number(firstInputString);
+  let secondNumber = Number(secondInputString);
+
+  if (firstInputString === '') {
+    errorMessage = 'Add meg az első számot! '
+  }
+  if (secondInputString === '') {
+    errorMessage += 'Add meg a második számot!'
+  }
+
+  return {
+    isValid: errorMessage.length === 0, 
+    errorMessage
+  }
+}
 
 function displayResult(operationSymbol, operationFunction) {
     let [firstInputString, secondInputString] = readInput();
+    let {isValid, errorMessage} = validateInput(firstInputString, secondInputString);
+    let innerTextValue = '';
+
     let firstNumber = Number(firstInputString);
     let secondNumber = Number(secondInputString);
-    let result = operationFunction(firstNumber, secondNumber)
-    document.querySelector(".js-container").innerText = `${ firstNumber } ${operationSymbol} ${ secondNumber } = ${result}`;
+
+    if (isValid) {
+      let result = operationFunction(firstNumber, secondNumber);
+      innerTextValue = `${ firstNumber } ${operationSymbol} ${ secondNumber } = ${result}`; 
+    } else {
+      innerTextValue = errorMessage;
+    }
+
+    
+    document.querySelector(".js-container").innerText = innerTextValue;
 }
 
   document.querySelector(".js-plus").addEventListener("click", () => displayResult('+', (a, b) => a + b));
