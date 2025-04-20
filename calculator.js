@@ -45,6 +45,21 @@ function validateResult (firstInputString, secondInputString, operationFunction)
   return '';
 }
 
+let history = [];
+
+function updateHistory(value) {
+  history.push(value);
+}
+
+function renderHistory() {
+  let html = '';
+  for (let i = 0; i < history.length; i++) {
+    html += `<li>${history[i]} </li>`;
+  }
+
+  document.querySelector('.js-history-container').innerHTML = html;
+}
+
 function displayResult(operationSymbol, operationFunction) {
     let [firstInputString, secondInputString] = readInput();
     let {isValid, errorMessage} = validate(firstInputString, secondInputString, operationFunction);
@@ -53,6 +68,8 @@ function displayResult(operationSymbol, operationFunction) {
     if (isValid) {  
       let result = calculateResult(firstInputString, secondInputString, operationFunction);
       innerTextValue = `${ firstInputString } ${operationSymbol} ${ secondInputString } = ${result}`; 
+      updateHistory(innerTextValue);
+      renderHistory();
     } else {
       innerTextValue = errorMessage;
     }
