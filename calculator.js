@@ -53,12 +53,12 @@ function updateHistory(value) {
 }
 
 function renderHistory() {
-  let html = '';
-  for (let i = 0; i < history.length; i++) {
-    html += `<li>${history[i]} </li>`;
-  }
+  // let html = '';
+  // for (let item of history) {
+  //   html += `<li>${item} </li>`;
+  // }
 
-  document.querySelector('.js-history-container').innerHTML = html;
+  document.querySelector('.js-history-container').innerHTML = history.map(x => `<li>${x}</li>` ).join("");
 }
 
 function displayResult(operationSymbol, operationFunction) {
