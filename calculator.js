@@ -48,18 +48,22 @@ function validateResult (firstInputString, secondInputString, operationFunction)
 let history = [];
 
 function updateHistory(value) {
-  // history.unshift(value);
   history = [value, ...history];
 }
 
 function renderHistory() {
-  // let html = '';
-  // for (let item of history) {
-  //   html += `<li>${item} </li>`;
-  // }
-
-  document.querySelector('.js-history-container').innerHTML = history.map(x => `<li>${x}</li>` ).join("");
+  document.querySelector('.js-history-container').innerHTML = history.map((x, i) => `<li>${x} <a href="#" data-index="${i}">Delete</a></li>` ).join("");
 }
+
+function historyClicked(event) {
+  let currentIndex = event.target.dataset.index;
+  if (typeof currentIndex !== 'undefined') {
+    history.splice(currentIndex, 1);
+    renderHistory();
+  }
+}
+
+document.querySelector('.js-history-container').addEventListener('click', historyClicked)
 
 function displayResult(operationSymbol, operationFunction) {
     let [firstInputString, secondInputString] = readInput();
