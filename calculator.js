@@ -48,7 +48,8 @@ function validateResult (firstInputString, secondInputString, operationFunction)
 let history = [];
 
 function updateHistory(value) {
-  history.push(value);
+  // history.unshift(value);
+  history = [value, ...history];
 }
 
 function renderHistory() {
