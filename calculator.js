@@ -52,8 +52,20 @@ function updateHistory(value) {
 }
 
 function renderHistory() {
-  document.querySelector('.js-history-container').innerHTML = history.map((x, i) => `<li>${x} <a href="#" data-index="${i}">Delete</a></li>` ).join("");
-}
+  const historyAlerts = history.map((x, i) => `
+  <div class="alert alert-dark d-flex align-items-center justify-content-between"alert">
+    ${x} <a href="#" data-index="${i}" class="btn btn-outline-secondary ms-3">
+    <img src="./images/trash.svg" alt="Delete" data-index="${i}"/>
+    </a>
+  </div>` ).join("");
+
+  const historyContent = `
+    <h2>History</h2>
+    ${historyAlerts}
+  `;
+
+  document.querySelector('.js-history-container').innerHTML = historyContent;
+};
 
 function historyClicked(event) {
   let currentIndex = event.target.dataset.index;
@@ -72,15 +84,24 @@ function displayResult(operationSymbol, operationFunction) {
     
     if (isValid) {  
       let result = calculateResult(firstInputString, secondInputString, operationFunction);
-      innerTextValue = `${ firstInputString } ${operationSymbol} ${ secondInputString } = ${result}`; 
-      updateHistory(innerTextValue);
+      let innerTextContent = `${ firstInputString } ${operationSymbol} ${ secondInputString } = ${result}`;
+      innerTextValue = `
+      <div class="alert alert-success" role="alert">
+        ${innerTextContent}
+      </div>
+      `; 
+      updateHistory(innerTextContent);
       renderHistory();
     } else {
-      innerTextValue = errorMessage;
+      innerTextValue = `
+      <div class="alert alert-danger" role="alert">
+        ${errorMessage}
+      </div>
+      `;
     }
 
     
-    document.querySelector(".js-container").innerText = innerTextValue;
+    document.querySelector(".js-container").innerHTML = innerTextValue;
 }
 
   document.querySelector(".js-plus").addEventListener("click", () => displayResult('+', (a, b) => a + b));

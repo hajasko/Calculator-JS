@@ -1,21 +1,14 @@
 body {
-    color: whitesmoke;
-    background-color: black;
+    /* color: whitesmoke; */
+    /* background-color: black; */
 }
 
 .container {
-    min-height: 40px;
-    border: 1px solid goldenrod;
-    padding: 20px;
+    /* min-height: 40px; */
+    /* border: 1px solid black; */
     font-size: 24px;
-    margin: 24px 0;
   }
   
-  .form-row {
-    padding-bottom: 20px;
-    
-  }
-
-  li {
+li {
     margin-left: 20px;
-  }
+}
